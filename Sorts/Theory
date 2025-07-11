@@ -1,0 +1,194 @@
+## 📘 DSA Sorting Algorithms Notes
+
+---
+
+### 🔹 1. Bubble Sort
+
+**🔍 Intuition:** Repeatedly swap adjacent elements if they are in the wrong order (like bubbles rising to the top).
+
+**📋 Steps:**
+
+```java
+for (int i = 0; i < n - 1; i++) {
+    for (int j = 0; j < n - i - 1; j++) {
+        if (arr[j] > arr[j + 1]) {
+            // swap
+        }
+    }
+}
+```
+
+**⏱️ Time & Space:**
+
+* Best: O(n)
+* Avg/Worst: O(n²)
+* Space: O(1)
+
+**✅ Stable:** Yes
+**✅ In-place:** Yes
+
+**🧠 Use-case:** Small datasets, good for learning.
+
+**🧪 Dry Run:**
+`[5, 1, 4, 2, 8]` → passes explained step by step.
+
+---
+
+### 🔹 2. Selection Sort
+
+**🔍 Intuition:** Repeatedly find the minimum and place it at the correct index.
+
+**📋 Steps:**
+
+```java
+for (int i = 0; i < n - 1; i++) {
+    int minIdx = i;
+    for (int j = i + 1; j < n; j++) {
+        if (arr[j] < arr[minIdx])
+            minIdx = j;
+    }
+    // swap arr[i] and arr[minIdx]
+}
+```
+
+**⏱️ Time & Space:**
+
+* Best/Average/Worst: O(n²)
+* Space: O(1)
+
+**❌ Stable:** No
+**✅ In-place:** Yes
+
+**🧠 Use-case:** When memory write operations are expensive.
+
+---
+
+### 🔹 3. Insertion Sort
+
+**🔍 Intuition:** Like sorting cards in your hand.
+
+**📋 Steps:**
+
+```java
+for (int i = 1; i < n; i++) {
+    int key = arr[i];
+    int j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j--;
+    }
+    arr[j + 1] = key;
+}
+```
+
+**⏱️ Time & Space:**
+
+* Best: O(n), Avg/Worst: O(n²)
+* Space: O(1)
+
+**✅ Stable:** Yes
+**✅ In-place:** Yes
+
+**🧠 Use-case:** Small or nearly sorted arrays.
+
+---
+
+### 🔹 4. Merge Sort
+
+**🔍 Intuition:** Divide and conquer – split array, sort each part, and merge.
+
+**📋 Steps:**
+
+```java
+void mergeSort(int[] arr, int l, int r) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+```
+
+**⏱️ Time & Space:**
+
+* All cases: O(n log n)
+* Space: O(n)
+
+**✅ Stable:** Yes
+**❌ In-place:** No
+
+**🧠 Use-case:** Large datasets, external sorting.
+
+---
+
+### 🔹 5. Quick Sort
+
+**🔍 Intuition:** Partition array around a pivot.
+
+**📋 Steps:**
+
+```java
+int partition(int[] arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            // swap arr[i], arr[j]
+        }
+    }
+    // swap arr[i+1], arr[high]
+    return i + 1;
+}
+
+void quickSort(int[] arr, int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+```
+
+**⏱️ Time & Space:**
+
+* Best/Average: O(n log n), Worst: O(n²)
+* Space: O(log n)
+
+**❌ Stable:** No
+**✅ In-place:** Yes
+
+**🧠 Use-case:** Fastest general-purpose sorting.
+
+---
+
+### 🔹 6. Summary Table
+
+| Algorithm   | Best       | Average    | Worst      | Space    | Stable | In-place |
+| ----------- | ---------- | ---------- | ---------- | -------- | ------ | -------- |
+| Bubble Sort | O(n)       | O(n²)      | O(n²)      | O(1)     | Yes    | Yes      |
+| Selection   | O(n²)      | O(n²)      | O(n²)      | O(1)     | No     | Yes      |
+| Insertion   | O(n)       | O(n²)      | O(n²)      | O(1)     | Yes    | Yes      |
+| Merge       | O(n log n) | O(n log n) | O(n log n) | O(n)     | Yes    | No       |
+| Quick       | O(n log n) | O(n log n) | O(n²)      | O(log n) | No     | Yes      |
+
+---
+
+### 🔹 7. Advanced Sorts (Only When Needed)
+
+* **Counting Sort:** O(n + k), good when range of data is small.
+* **Radix Sort:** For sorting numbers with fixed digit length.
+* **Bucket Sort:** When input is uniformly distributed.
+
+---
+
+### 🔹 8. Problems to Practice
+
+| Problem                               | Concept                 |
+| ------------------------------------- | ----------------------- |
+| Sort 0s, 1s, 2s (Dutch National Flag) | In-place categorization |
+| Merge Intervals                       | Sorting + greedy        |
+| Minimum Platforms                     | Sort start/end times    |
+| Kth smallest pair                     | Binary search + sorting |
+| Inversion Count                       | Merge Sort              |
